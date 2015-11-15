@@ -4,6 +4,7 @@
 # See file LICENSE for details
 #++
 
+require 'pp'
 module Coolio
   # A buffered I/O class witch fits into the Coolio Watcher framework.
   # It provides both an observer which reads data as it's received
@@ -32,7 +33,14 @@ module Coolio
 
     # Attach to the event loop
     def attach(loop)
-      @_read_watcher.attach(loop)
+      begin
+        @_read_watcher.attach(loop)
+      rescue => e
+        warn "===> exception: ", PP.pp(e, '')
+        warn "===> loop: ", PP.pp(loop, '')
+        warn "===> self: ", PP.pp(self, '')
+        raise
+      end
       schedule_write if !@_write_buffer.empty?
       self
     end
