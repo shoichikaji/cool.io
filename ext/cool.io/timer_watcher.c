@@ -96,7 +96,7 @@ static VALUE Coolio_TimerWatcher_attach(VALUE self, VALUE loop)
   struct Coolio_Watcher *watcher_data;
     
 	if(!rb_obj_is_kind_of(loop, cCoolio_Loop))
-		rb_raise(rb_eArgError, "expected loop to be an instance of Coolio::Loop");
+		rb_raise(rb_eArgError, "timer_watcher.c:99 expected loop to be an instance of Coolio::Loop");
 
   Data_Get_Struct(loop, struct Coolio_Loop, loop_data);
   Data_Get_Struct(self, struct Coolio_Watcher, watcher_data);
